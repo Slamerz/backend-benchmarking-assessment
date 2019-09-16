@@ -8,9 +8,10 @@
     for an arbitrary list of strings.
 
 """
-__author__ = "???"
+__author__ = "Jacob Walker"
 
 import sys
+from collections import defaultdict
 
 
 def alphabetize(string):
@@ -39,11 +40,14 @@ def find_anagrams(words):
         {'dgo': ['dog'], 'act': ['cat', 'act']}
 
     """
-    anagrams = {
-        alphabetize(word): [
-            w for w in words
-            if alphabetize(w) == alphabetize(word)]
-        for word in words}
+    anagrams = {}
+    for word in words:
+        w = alphabetize(word)
+        if w not in anagrams:
+            anagrams.setdefault(w, [word])
+        else:
+            anagrams[w].append(word)
+
     return anagrams
 
 
